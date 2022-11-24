@@ -1,0 +1,4181 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        #map {
+            width: 1316px;
+            height: 891px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/Municipios_0.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[12.483079614868007,-89.67765847439239],[17.000192507809285,-82.79380263236564]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_Municipios_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_MUNI'] !== null ? autolinker.link(feature.properties['COD_MUNI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_MUNI'] !== null ? autolinker.link(feature.properties['NOM_MUNI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POB_2000'] !== null ? autolinker.link(feature.properties['POB_2000'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['IDH_2001'] !== null ? autolinker.link(feature.properties['IDH_2001'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SISTEMA</strong><br />' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COORD_XCENTRO'] !== null ? autolinker.link(feature.properties['COORD_XCENTRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>COORD_YCENTRO</strong><br />' + (feature.properties['COORD_YCENTRO'] !== null ? autolinker.link(feature.properties['COORD_YCENTRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>COD_DEPTO</strong><br />' + (feature.properties['COD_DEPTO'] !== null ? autolinker.link(feature.properties['COD_DEPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_DEPTO'] !== null ? autolinker.link(feature.properties['NOM_DEPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['IDRegion'] !== null ? autolinker.link(feature.properties['IDRegion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape.STArea()'] !== null ? autolinker.link(feature.properties['Shape.STArea()'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape.STLength()'] !== null ? autolinker.link(feature.properties['Shape.STLength()'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CobroORT'] !== null ? autolinker.link(feature.properties['CobroORT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sector_eeh_1'] !== null ? autolinker.link(feature.properties['sector_eeh_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_MUNI_ENERGIS'] !== null ? autolinker.link(feature.properties['COD_MUNI_ENERGIS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Municipios_0_0(feature) {
+            switch(String(feature.properties['NOM_MUNI'])) {
+                case 'Aguanqueterique':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,199,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ahuas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,184,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ajuterique':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,222,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Alauca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,197,201,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Alianza':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,252,198,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Alubaren':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,252,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Amapala':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,221,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Apacilagua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,212,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Arada':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,252,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Aramecina':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,200,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Arenal':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,194,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Arizona':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,252,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Atima':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,189,247,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Azacualpa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,250,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Balfate':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,252,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Belen':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,252,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Belen Gualcho':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(194,252,251,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Bonito Oriental':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,204,244,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Brus Laguna':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,212,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cabanas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(205,187,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Camasca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,239,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Campamento':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,252,218,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Candelaria':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,204,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cane':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,248,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Caridad':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(194,241,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Catacamas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,194,230,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cedros':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,202,246,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ceguaca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,252,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Chinacla':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,252,211,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Chinda':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,199,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Choloma':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,211,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Choluteca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,227,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cololaca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,252,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Colomoncagua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,184,185,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Comayagua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,210,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Concepcion':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,252,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Concepcion de Maria':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,249,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Concepcion del Norte':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,215,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Concepcion del Sur':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,252,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Concordia':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,252,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Copan Ruinas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,209,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Corquin':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,252,226,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Cucuyagua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,210,231,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Curaren':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,230,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Danli':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,202,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Distrito Central':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,189,222,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Dolores':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,252,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Dolores Merendon':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(195,252,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Dulce Nombre':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,212,244,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Dulce Nombre de Culmi':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,212,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Duyure':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,252,242,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Corpus':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,211,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Negrito':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,252,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Nispero':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(242,197,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Paraiso':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,252,201,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Porvenir':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,252,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Progreso':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,252,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Rosario':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,246,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'El Triunfo':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,184,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Erandique':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,210,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Esparta':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,235,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Esquias':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Esquipulas del Norte':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,252,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Florida':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,204,214,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Fraternidad':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,212,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Goascoran':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,197,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Gracias':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,215,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guaimaca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,243,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guajiquiro':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,234,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Gualaco':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,197,246,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Gualala':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,250,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Gualcince':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,252,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guanaja':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,192,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guarita':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,252,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guarizama':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,252,195,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guata':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,236,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guayape':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,220,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Guinope':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,252,211,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Humuya':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,247,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ilama':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,223,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Intibuca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,179,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Iriona':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jacaleapa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,207,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jano':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,184,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jesus de Otoro':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,252,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jocon':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jose Santos Guardiola':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,252,246,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Juan Francisco  Bulnes':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,252,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jutiapa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,225,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Juticalpa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,204,218,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Campa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,252,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Ceiba':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,252,242,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Encarnacion':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,252,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Esperanza':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,194,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Iguala':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,242,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Jigua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,202,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Labor':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,202,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Libertad':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,234,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Lima':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,241,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Masica':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,221,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Paz':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,200,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Trinidad':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,210,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Union':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,219,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Venta':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,188,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'La Virtud':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,252,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lago de Yojoa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,252,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lamani':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,216,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Langue':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,200,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Las Flores':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,244,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Las Lajas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,182,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Las Vegas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,252,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lauterique':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,197,224,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lejamani':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,252,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lepaera':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,187,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lepaterique':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,199,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Limon':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Liure':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,204,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lucerna':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,226,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Macuelizo':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,222,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Magdalena':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,252,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mangulile':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,252,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Manto':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mapulaca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,194,244,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Maraita':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,202,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Marale':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,202,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Marcala':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,252,247,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Marcovia':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,252,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Masaguara':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,192,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Meambar':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,182,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mercedes':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,252,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mercedes de Oriente':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,252,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Minas de Oro':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,252,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Morazan':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,210,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Moroceli':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,226,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Morolica':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,252,197,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nacaome':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,204,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Namasigue':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,179,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Naranjito':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,210,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nueva Arcadia':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,252,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nueva Armenia':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,251,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nueva Frontera':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,252,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Nuevo Celilac':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,252,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ocotepeque':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,189,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ojojona':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,252,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ojos de Agua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,252,228,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Olanchito':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,252,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Omoa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,187,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Opatoro':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,189,200,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Orica':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,223,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Orocuina':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,238,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Oropoli':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,199,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Patuca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,210,242,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pespire':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,252,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Petoa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,235,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pimienta':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Piraera':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,238,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Potrerillos':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,229,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Proteccion':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,252,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Puerto Cortes':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,192,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Puerto Lempira':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,252,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Quimistan':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,212,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ramon Villeda Morales':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,218,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Reitoca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,252,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Roatan':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,252,244,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Saba':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,252,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sabanagrande':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,252,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Salama':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,252,200,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Agustin':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,252,189,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Andres':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,252,197,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Antonio':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,204,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Antonio de Cortes':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,252,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Antonio de Flores':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,247,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Antonio de Oriente':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,187,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Antonio del Norte':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,252,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Buenaventura':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,215,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Esteban':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,189,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Fernando':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,252,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,232,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco de Becerra':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,243,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco de Coray':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,247,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco de La Paz':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,252,251,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco de Ojuera':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,232,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco de Opalaca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,252,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco de Yojoa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,202,249,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Francisco del Valle':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,209,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Ignacio':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,182,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Isidro':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,223,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Jeronimo':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,232,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Jorge':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,252,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Jose':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,223,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Jose de Colinas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,252,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Jose de Comayagua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,204,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Jose del Potrero':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,236,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Juan':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,252,230,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Juan Guarita':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(194,252,250,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Juan de Flores':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,252,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Juan de Opoa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,252,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Lorenzo':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,252,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Lucas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,187,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Luis':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(241,252,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Manuel':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,217,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Manuel Colohete':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,205,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Marcos':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(194,232,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Marcos de Caiquin':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,240,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Marcos de Colon':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,192,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Marcos de Sierra':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,187,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Matias':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,229,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Miguelito':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(191,182,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Nicolas':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,233,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Pedro':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,197,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Pedro Sula':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,204,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Pedro Zacapa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,252,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Pedro de Tutule':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,187,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Rafael':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,240,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Sebastian':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(242,252,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'San Vicente Centenario':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,252,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Ana':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,187,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Ana de Yusuguare':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,207,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Barbara':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,184,250,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Cruz':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,187,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Cruz de Yojoa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,252,228,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Elena':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,189,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Fe':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,252,249,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Lucia':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,207,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Maria':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,184,185,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Maria del Real':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,252,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Rita':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,252,250,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Rosa de Aguan':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,189,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santa Rosa de Copan':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,194,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Santiago de Puringla':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,197,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sensenti':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,252,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Siguatepeque':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,252,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Silca':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,252,250,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sinuapa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,217,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Soledad':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,204,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sonaguera':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,189,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sulaco':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,234,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Talanga':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,252,210,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Talgua':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,189,184,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tambla':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,239,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tatumbla':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,252,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taulabe':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,252,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tela':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,230,199,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Teupasenti':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(194,249,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Texiguat':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,252,245,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tocoa':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,229,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tomala':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,252,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Trinidad':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,202,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Trinidad de Copan':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,182,231,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Trojes':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Trujillo':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,252,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Utila':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Vado Ancho':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,223,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Valladolid':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,252,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Valle de Angeles':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,252,208,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Vallecillo':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,212,221,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Veracruz':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,252,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Victoria':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,199,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Villa de San Antonio':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,252,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Villa de San Francisco':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,199,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Villanueva':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,215,251,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Virginia':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,252,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Wampusirpi':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,212,213,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yamaranguila':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,179,252,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yarula':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,201,179,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yauyupe':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,252,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yocon':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,252,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yorito':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,252,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yoro':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,252,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yuscaran':
+                    return {
+                pane: 'pane_Municipios_0',
+                opacity: 1,
+                color: 'rgba(110,110,110,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,189,199,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Municipios_0');
+        map.getPane('pane_Municipios_0').style.zIndex = 400;
+        map.getPane('pane_Municipios_0').style['mix-blend-mode'] = 'normal';
+        var layer_Municipios_0 = new L.geoJson(json_Municipios_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Municipios_0',
+            layerName: 'layer_Municipios_0',
+            pane: 'pane_Municipios_0',
+            onEachFeature: pop_Municipios_0,
+            style: style_Municipios_0_0,
+        });
+        bounds_group.addLayer(layer_Municipios_0);
+        map.addLayer(layer_Municipios_0);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Municipios<br /><table><tr><td style="text-align: center;"><img src="legend/Municipios_0_Aguanqueterique0.png" /></td><td>Aguanqueterique</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Ahuas1.png" /></td><td>Ahuas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Ajuterique2.png" /></td><td>Ajuterique</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Alauca3.png" /></td><td>Alauca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Alianza4.png" /></td><td>Alianza</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Alubaren5.png" /></td><td>Alubaren</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Amapala6.png" /></td><td>Amapala</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Apacilagua7.png" /></td><td>Apacilagua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Arada8.png" /></td><td>Arada</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Aramecina9.png" /></td><td>Aramecina</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Arenal10.png" /></td><td>Arenal</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Arizona11.png" /></td><td>Arizona</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Atima12.png" /></td><td>Atima</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Azacualpa13.png" /></td><td>Azacualpa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Balfate14.png" /></td><td>Balfate</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Belen15.png" /></td><td>Belen</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_BelenGualcho16.png" /></td><td>Belen Gualcho</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_BonitoOriental17.png" /></td><td>Bonito Oriental</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_BrusLaguna18.png" /></td><td>Brus Laguna</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Cabanas19.png" /></td><td>Cabanas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Camasca20.png" /></td><td>Camasca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Campamento21.png" /></td><td>Campamento</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Candelaria22.png" /></td><td>Candelaria</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Cane23.png" /></td><td>Cane</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Caridad24.png" /></td><td>Caridad</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Catacamas25.png" /></td><td>Catacamas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Cedros26.png" /></td><td>Cedros</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Ceguaca27.png" /></td><td>Ceguaca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Chinacla28.png" /></td><td>Chinacla</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Chinda29.png" /></td><td>Chinda</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Choloma30.png" /></td><td>Choloma</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Choluteca31.png" /></td><td>Choluteca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Cololaca32.png" /></td><td>Cololaca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Colomoncagua33.png" /></td><td>Colomoncagua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Comayagua34.png" /></td><td>Comayagua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Concepcion35.png" /></td><td>Concepcion</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ConcepciondeMaria36.png" /></td><td>Concepcion de Maria</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ConcepciondelNorte37.png" /></td><td>Concepcion del Norte</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ConcepciondelSur38.png" /></td><td>Concepcion del Sur</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Concordia39.png" /></td><td>Concordia</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_CopanRuinas40.png" /></td><td>Copan Ruinas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Corquin41.png" /></td><td>Corquin</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Cucuyagua42.png" /></td><td>Cucuyagua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Curaren43.png" /></td><td>Curaren</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Danli44.png" /></td><td>Danli</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_DistritoCentral45.png" /></td><td>Distrito Central</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Dolores46.png" /></td><td>Dolores</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_DoloresMerendon47.png" /></td><td>Dolores Merendon</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_DulceNombre48.png" /></td><td>Dulce Nombre</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_DulceNombredeCulmi49.png" /></td><td>Dulce Nombre de Culmi</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Duyure50.png" /></td><td>Duyure</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElCorpus51.png" /></td><td>El Corpus</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElNegrito52.png" /></td><td>El Negrito</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElNispero53.png" /></td><td>El Nispero</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElParaiso54.png" /></td><td>El Paraiso</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElPorvenir55.png" /></td><td>El Porvenir</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElProgreso56.png" /></td><td>El Progreso</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElRosario57.png" /></td><td>El Rosario</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ElTriunfo58.png" /></td><td>El Triunfo</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Erandique59.png" /></td><td>Erandique</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Esparta60.png" /></td><td>Esparta</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Esquias61.png" /></td><td>Esquias</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_EsquipulasdelNorte62.png" /></td><td>Esquipulas del Norte</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Florida63.png" /></td><td>Florida</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Fraternidad64.png" /></td><td>Fraternidad</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Goascoran65.png" /></td><td>Goascoran</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Gracias66.png" /></td><td>Gracias</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guaimaca67.png" /></td><td>Guaimaca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guajiquiro68.png" /></td><td>Guajiquiro</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Gualaco69.png" /></td><td>Gualaco</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Gualala70.png" /></td><td>Gualala</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Gualcince71.png" /></td><td>Gualcince</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guanaja72.png" /></td><td>Guanaja</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guarita73.png" /></td><td>Guarita</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guarizama74.png" /></td><td>Guarizama</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guata75.png" /></td><td>Guata</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guayape76.png" /></td><td>Guayape</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Guinope77.png" /></td><td>Guinope</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Humuya78.png" /></td><td>Humuya</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Ilama79.png" /></td><td>Ilama</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Intibuca80.png" /></td><td>Intibuca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Iriona81.png" /></td><td>Iriona</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Jacaleapa82.png" /></td><td>Jacaleapa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Jano83.png" /></td><td>Jano</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_JesusdeOtoro84.png" /></td><td>Jesus de Otoro</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Jocon85.png" /></td><td>Jocon</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_JoseSantosGuardiola86.png" /></td><td>Jose Santos Guardiola</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_JuanFranciscoBulnes87.png" /></td><td>Juan Francisco  Bulnes</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Jutiapa88.png" /></td><td>Jutiapa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Juticalpa89.png" /></td><td>Juticalpa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaCampa90.png" /></td><td>La Campa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaCeiba91.png" /></td><td>La Ceiba</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaEncarnacion92.png" /></td><td>La Encarnacion</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaEsperanza93.png" /></td><td>La Esperanza</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaIguala94.png" /></td><td>La Iguala</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaJigua95.png" /></td><td>La Jigua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaLabor96.png" /></td><td>La Labor</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaLibertad97.png" /></td><td>La Libertad</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaLima98.png" /></td><td>La Lima</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaMasica99.png" /></td><td>La Masica</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaPaz100.png" /></td><td>La Paz</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaTrinidad101.png" /></td><td>La Trinidad</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaUnion102.png" /></td><td>La Union</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaVenta103.png" /></td><td>La Venta</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LaVirtud104.png" /></td><td>La Virtud</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LagodeYojoa105.png" /></td><td>Lago de Yojoa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Lamani106.png" /></td><td>Lamani</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Langue107.png" /></td><td>Langue</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LasFlores108.png" /></td><td>Las Flores</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LasLajas109.png" /></td><td>Las Lajas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_LasVegas110.png" /></td><td>Las Vegas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Lauterique111.png" /></td><td>Lauterique</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Lejamani112.png" /></td><td>Lejamani</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Lepaera113.png" /></td><td>Lepaera</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Lepaterique114.png" /></td><td>Lepaterique</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Limon115.png" /></td><td>Limon</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Liure116.png" /></td><td>Liure</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Lucerna117.png" /></td><td>Lucerna</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Macuelizo118.png" /></td><td>Macuelizo</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Magdalena119.png" /></td><td>Magdalena</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Mangulile120.png" /></td><td>Mangulile</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Manto121.png" /></td><td>Manto</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Mapulaca122.png" /></td><td>Mapulaca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Maraita123.png" /></td><td>Maraita</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Marale124.png" /></td><td>Marale</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Marcala125.png" /></td><td>Marcala</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Marcovia126.png" /></td><td>Marcovia</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Masaguara127.png" /></td><td>Masaguara</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Meambar128.png" /></td><td>Meambar</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Mercedes129.png" /></td><td>Mercedes</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_MercedesdeOriente130.png" /></td><td>Mercedes de Oriente</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_MinasdeOro131.png" /></td><td>Minas de Oro</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Morazan132.png" /></td><td>Morazan</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Moroceli133.png" /></td><td>Moroceli</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Morolica134.png" /></td><td>Morolica</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Nacaome135.png" /></td><td>Nacaome</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Namasigue136.png" /></td><td>Namasigue</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Naranjito137.png" /></td><td>Naranjito</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_NuevaArcadia138.png" /></td><td>Nueva Arcadia</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_NuevaArmenia139.png" /></td><td>Nueva Armenia</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_NuevaFrontera140.png" /></td><td>Nueva Frontera</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_NuevoCelilac141.png" /></td><td>Nuevo Celilac</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Ocotepeque142.png" /></td><td>Ocotepeque</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Ojojona143.png" /></td><td>Ojojona</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_OjosdeAgua144.png" /></td><td>Ojos de Agua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Olanchito145.png" /></td><td>Olanchito</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Omoa146.png" /></td><td>Omoa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Opatoro147.png" /></td><td>Opatoro</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Orica148.png" /></td><td>Orica</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Orocuina149.png" /></td><td>Orocuina</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Oropoli150.png" /></td><td>Oropoli</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Patuca151.png" /></td><td>Patuca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Pespire152.png" /></td><td>Pespire</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Petoa153.png" /></td><td>Petoa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Pimienta154.png" /></td><td>Pimienta</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Piraera155.png" /></td><td>Piraera</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Potrerillos156.png" /></td><td>Potrerillos</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Proteccion157.png" /></td><td>Proteccion</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_PuertoCortes158.png" /></td><td>Puerto Cortes</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_PuertoLempira159.png" /></td><td>Puerto Lempira</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Quimistan160.png" /></td><td>Quimistan</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_RamonVilledaMorales161.png" /></td><td>Ramon Villeda Morales</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Reitoca162.png" /></td><td>Reitoca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Roatan163.png" /></td><td>Roatan</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Saba164.png" /></td><td>Saba</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Sabanagrande165.png" /></td><td>Sabanagrande</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Salama166.png" /></td><td>Salama</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanAgustin167.png" /></td><td>San Agustin</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanAndres168.png" /></td><td>San Andres</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanAntonio169.png" /></td><td>San Antonio</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanAntoniodeCortes170.png" /></td><td>San Antonio de Cortes</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanAntoniodeFlores171.png" /></td><td>San Antonio de Flores</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanAntoniodeOriente172.png" /></td><td>San Antonio de Oriente</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanAntoniodelNorte173.png" /></td><td>San Antonio del Norte</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanBuenaventura174.png" /></td><td>San Buenaventura</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanEsteban175.png" /></td><td>San Esteban</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFernando176.png" /></td><td>San Fernando</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFrancisco177.png" /></td><td>San Francisco</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFranciscodeBecerra178.png" /></td><td>San Francisco de Becerra</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFranciscodeCoray179.png" /></td><td>San Francisco de Coray</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFranciscodeLaPaz180.png" /></td><td>San Francisco de La Paz</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFranciscodeOjuera181.png" /></td><td>San Francisco de Ojuera</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFranciscodeOpalaca182.png" /></td><td>San Francisco de Opalaca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFranciscodeYojoa183.png" /></td><td>San Francisco de Yojoa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanFranciscodelValle184.png" /></td><td>San Francisco del Valle</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanIgnacio185.png" /></td><td>San Ignacio</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanIsidro186.png" /></td><td>San Isidro</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJeronimo187.png" /></td><td>San Jeronimo</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJorge188.png" /></td><td>San Jorge</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJose189.png" /></td><td>San Jose</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJosedeColinas190.png" /></td><td>San Jose de Colinas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJosedeComayagua191.png" /></td><td>San Jose de Comayagua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJosedelPotrero192.png" /></td><td>San Jose del Potrero</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJuan193.png" /></td><td>San Juan</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJuanGuarita194.png" /></td><td>San Juan Guarita</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJuandeFlores195.png" /></td><td>San Juan de Flores</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanJuandeOpoa196.png" /></td><td>San Juan de Opoa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanLorenzo197.png" /></td><td>San Lorenzo</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanLucas198.png" /></td><td>San Lucas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanLuis199.png" /></td><td>San Luis</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanManuel200.png" /></td><td>San Manuel</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanManuelColohete201.png" /></td><td>San Manuel Colohete</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanMarcos202.png" /></td><td>San Marcos</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanMarcosdeCaiquin203.png" /></td><td>San Marcos de Caiquin</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanMarcosdeColon204.png" /></td><td>San Marcos de Colon</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanMarcosdeSierra205.png" /></td><td>San Marcos de Sierra</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanMatias206.png" /></td><td>San Matias</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanMiguelito207.png" /></td><td>San Miguelito</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanNicolas208.png" /></td><td>San Nicolas</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanPedro209.png" /></td><td>San Pedro</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanPedroSula210.png" /></td><td>San Pedro Sula</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanPedroZacapa211.png" /></td><td>San Pedro Zacapa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanPedrodeTutule212.png" /></td><td>San Pedro de Tutule</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanRafael213.png" /></td><td>San Rafael</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanSebastian214.png" /></td><td>San Sebastian</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SanVicenteCentenario215.png" /></td><td>San Vicente Centenario</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaAna216.png" /></td><td>Santa Ana</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaAnadeYusuguare217.png" /></td><td>Santa Ana de Yusuguare</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaBarbara218.png" /></td><td>Santa Barbara</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaCruz219.png" /></td><td>Santa Cruz</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaCruzdeYojoa220.png" /></td><td>Santa Cruz de Yojoa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaElena221.png" /></td><td>Santa Elena</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaFe222.png" /></td><td>Santa Fe</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaLucia223.png" /></td><td>Santa Lucia</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaMaria224.png" /></td><td>Santa Maria</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaMariadelReal225.png" /></td><td>Santa Maria del Real</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaRita226.png" /></td><td>Santa Rita</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaRosadeAguan227.png" /></td><td>Santa Rosa de Aguan</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantaRosadeCopan228.png" /></td><td>Santa Rosa de Copan</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_SantiagodePuringla229.png" /></td><td>Santiago de Puringla</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Sensenti230.png" /></td><td>Sensenti</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Siguatepeque231.png" /></td><td>Siguatepeque</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Silca232.png" /></td><td>Silca</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Sinuapa233.png" /></td><td>Sinuapa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Soledad234.png" /></td><td>Soledad</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Sonaguera235.png" /></td><td>Sonaguera</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Sulaco236.png" /></td><td>Sulaco</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Talanga237.png" /></td><td>Talanga</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Talgua238.png" /></td><td>Talgua</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Tambla239.png" /></td><td>Tambla</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Tatumbla240.png" /></td><td>Tatumbla</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Taulabe241.png" /></td><td>Taulabe</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Tela242.png" /></td><td>Tela</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Teupasenti243.png" /></td><td>Teupasenti</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Texiguat244.png" /></td><td>Texiguat</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Tocoa245.png" /></td><td>Tocoa</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Tomala246.png" /></td><td>Tomala</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Trinidad247.png" /></td><td>Trinidad</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_TrinidaddeCopan248.png" /></td><td>Trinidad de Copan</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Trojes249.png" /></td><td>Trojes</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Trujillo250.png" /></td><td>Trujillo</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Utila251.png" /></td><td>Utila</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_VadoAncho252.png" /></td><td>Vado Ancho</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Valladolid253.png" /></td><td>Valladolid</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_ValledeAngeles254.png" /></td><td>Valle de Angeles</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Vallecillo255.png" /></td><td>Vallecillo</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Veracruz256.png" /></td><td>Veracruz</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Victoria257.png" /></td><td>Victoria</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_VilladeSanAntonio258.png" /></td><td>Villa de San Antonio</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_VilladeSanFrancisco259.png" /></td><td>Villa de San Francisco</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Villanueva260.png" /></td><td>Villanueva</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Virginia261.png" /></td><td>Virginia</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Wampusirpi262.png" /></td><td>Wampusirpi</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Yamaranguila263.png" /></td><td>Yamaranguila</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Yarula264.png" /></td><td>Yarula</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Yauyupe265.png" /></td><td>Yauyupe</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Yocon266.png" /></td><td>Yocon</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Yorito267.png" /></td><td>Yorito</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Yoro268.png" /></td><td>Yoro</td></tr><tr><td style="text-align: center;"><img src="legend/Municipios_0_Yuscaran269.png" /></td><td>Yuscaran</td></tr></table>': layer_Municipios_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
